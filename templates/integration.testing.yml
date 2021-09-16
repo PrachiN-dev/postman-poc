@@ -32,7 +32,7 @@ steps:
     displayName: 'Publish Test Report'
     inputs:
       testResultsFormat: "JUnit"
-      testResultsFiles: JUnitReport.xml
+      testResultsFiles: "**/api-test.*.xml"
       searchFolder: '$(Pipeline.Workspace)/s'
     condition: always()
     continueOnError: true

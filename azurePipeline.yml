@@ -10,10 +10,10 @@ variables:
 stages:
 - stage: api_testing_integration
   displayName: Repair MVP API Integration Tests
-jobs:
-- job: API_Integration_Testing
-  displayName: Integration Tests
-  pool:
-    vmImage: ubuntu-latest
-  steps:
-    - template: templates/integration.testing.yml
+  jobs:
+    - job: API_Integration_Testing
+      displayName: Integration Tests
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+        - template: templates/integration.testing.yml

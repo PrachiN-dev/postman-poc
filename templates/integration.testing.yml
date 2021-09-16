@@ -21,8 +21,8 @@ steps:
       customCommand: install -g newman
 
    - task: Npm@1
-    displayName: npm custom
-    inputs:
+     displayName: npm custom
+     inputs:
       command: custom
       verbose: false
       customCommand: install -g newman-reporter-htmlextra
@@ -36,8 +36,8 @@ steps:
     displayName: 'Run API Integration Tests'
   
  - task: PublishHtmlReport@1
-    displayName: 'Publish HTML Report'
-    inputs:
+   displayName: 'Publish HTML Report'
+   inputs:
       targetPath: '$(Pipeline.Workspace)/s'
-    condition: always()
-    continueOnError: true
+   condition: always()
+   continueOnError: true

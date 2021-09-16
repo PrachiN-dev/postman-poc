@@ -20,9 +20,9 @@ steps:
       verbose: false
       customCommand: install -g newman
 
-   - task: Npm@1
-     displayName: npm custom
-     inputs:
+  - task: Npm@1
+    displayName: npm custom
+    inputs:
       command: custom
       verbose: false
       customCommand: install -g newman-reporter-htmlextra

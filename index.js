@@ -6,24 +6,17 @@ const newman = require("newman");
 // const collections = [integrationCollection];
 // for(const collection of collections){
 newman.run({
-    collection: "./tests/repair_poc.postman_collection.json", // Collection URL from a public link or the Postman API can also be used
-    // environment: testEnvironment,
-    reporters: ["htmlextra"],
-    iterationCount: 1,
+    reporters: 'junitfull',
     reporter: {
-        htmlextra: {
-            logs: true,
-            browserTitle: "API Test Report",
-            title: "Integration Test Report",
-            hideRequestBody: ["Login"],
-            hideResponseBody: ["Auth Request"],
-            skipEnvironmentVars: ["API_KEY"],
-            skipGlobalVars: ["API_TOKEN"],
-            skipSensitiveData: true,
-            showFolderDescription: true,
-            timezone: "Australia/Sydney",
-        },
+        junitfull: {
+            export: './tests/result.xml', // If not specified, the file will be written to `newman/` in the current working directory.
+        }
     },
+    iterationCount: 2
+}, (error) => {
+        if(error) {
+            console.log(error);
+        }
     // }, (error) => {
     //     if(error) {
     //         console.log(error);

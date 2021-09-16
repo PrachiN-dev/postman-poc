@@ -35,9 +35,9 @@ steps:
   - script: newman run $(Build.SourcesDirectory)/tests/repair_poc.postman_collection.json -e $(Build.SourcesDirectory)/environments/Test.postman_environment.json && node index.js
     displayName: 'Run API Integration Tests'
   
- - task: PublishHtmlReport@1
-   displayName: 'Publish HTML Report'
-   inputs:
+  - task: PublishHtmlReport@1
+    displayName: 'Publish HTML Report'
+    inputs:
       targetPath: '$(Pipeline.Workspace)/s'
-   condition: always()
-   continueOnError: true
+    condition: always()
+    continueOnError: true

@@ -4,7 +4,6 @@ trigger:
 - main
 
 variables:
-- group: vargroup-main
 - name: npm_config_cache
   value: $(Pipeline.Workspace)/.npm
 stages:

@@ -6,13 +6,13 @@ const newman = require("newman");
 // const collections = [integrationCollection];
 // for(const collection of collections){
 newman.run({
+    collection: './tests/repair_poc.postman_collection.json',
     reporters: 'junitfull',
     reporter: {
         junitfull: {
-            export: './tests/result.xml', // If not specified, the file will be written to `newman/` in the current working directory.
+            export: './reports/result.xml', // If not specified, the file will be written to `newman/` in the current working directory.
         }
     },
-    iterationCount: 2
 }, (error) => {
         if(error) {
             console.log(error);

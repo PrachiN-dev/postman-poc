@@ -58,4 +58,4 @@ web_modules/
 .rts2_cache_umd/
 
 # Reporter
-newman/
+reports/

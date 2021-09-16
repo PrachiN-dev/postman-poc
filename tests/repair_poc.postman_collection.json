@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "c8f20eba-a4c7-4150-bafa-b08a2f14855b",
-		"name": "POC Repair",
+		"name": "repair_poc",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,9 +12,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"var data = pm.response.json().data;\r",
+							"pm.test(\"Verify status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"pm.test(\"Verify correct first name is returned\", function () {\r",
+							"    pm.expect(data[0].first_name).to.equal(\"George\")\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -23,7 +28,7 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"eval(globals.postmanBDD);"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -70,9 +75,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
+							"pm.test(\"Response should return 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});"
+							"});\r",
+							"pm.test(\"Response should return correct name\", function () {\r",
+							"    pm.expect(pm.response.json().name).to.equal(\"test\");\r",
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -83,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"job\": \"user1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,7 +127,11 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"eval(globals.postmanBDD);"
+					"pm.test(\"Response should return correct header\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"",
+					""
 				]
 			}
 		}

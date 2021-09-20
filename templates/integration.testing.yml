@@ -3,7 +3,7 @@ steps:
     displayName: 'Use Node 14.x'
     inputs:
       versionSpec: 14.x
-    
+
   - task: Cache@2
     displayName: 'Cache npm'
     inputs:
@@ -13,26 +13,22 @@ steps:
         npm
       path: $(npm_config_cache)
 
-  - task: Npm@1
-    displayName: npm custom
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: install -g newman
-
   - script: |
       npm ci
     displayName: 'Install project dependencies'
-    workingDirectory: $(Build.SourcesDirectory)  
-      
-  - script: newman run $(Build.SourcesDirectory)/tests/repair_poc.postman_collection.json -e $(Build.SourcesDirectory)/environments/Test.postman_environment.json && node index.js
-    displayName: 'Run API Integration Tests'
-  
+    workingDirectory: $(Build.SourcesDirectory)
+  - task: Npm@1
+    displayName: Run
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      customCommand: run newman-local
+
   - task: PublishTestResults@2
     displayName: 'Publish Test Report'
     inputs:
-      testResultsFormat: "JUnit"
-      testResultsFiles: "**/api-test*.xml"
-      searchFolder: '$(Pipeline.Workspace)/s'
+      testResultsFormat: JUnit
+      testResultsFiles: api-test*.xml
+      searchFolder: $(Build.SourcesDirectory)/reports
     condition: always()
     continueOnError: true

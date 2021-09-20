@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "newman-local": "newman run ./tests/repair_poc.postman_collection.json -e ./environments/Test.postman_environment.json && node index.js"
+    "newman-local": "node index.js"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

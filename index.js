@@ -15,11 +15,11 @@ const newman = require('newman');
 newman.run({
     collection : './tests/repair_poc.postman_collection.json',
     environment : './environments/Test.postman_environment.json',
-    // envVar: [ 
+    // envVar: [
     //     { "key":"url", "value":"https://reqres.in" },
     //     { "key":"userId", "value":'1'}
     // ],
-    reporters: 'junitfull',
+    reporters: ['junitfull', 'cli'],
     reporter: {
         junitfull: {
             export: './reports/api-test.xml',

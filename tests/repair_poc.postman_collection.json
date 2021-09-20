@@ -17,7 +17,8 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"pm.test(\"Verify correct first name is returned\", function () {\r",
-							"    pm.expect(data[0].first_name).to.equal(\"George\")\r",
+							"    pm.expect(data[0].first_name).to.equal(\"George\");\r",
+							"    pm.environment.set(\"userId\", data[0].id);\r",
 							"});\r",
 							""
 						],
@@ -69,18 +70,29 @@
 			"response": []
 		},
 		{
-			"name": "Post Request",
+			"name": "Create User",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"\r",
 							"pm.test(\"Response should return 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							"pm.test(\"Response should return correct name\", function () {\r",
-							"    pm.expect(pm.response.json().name).to.equal(\"test\");\r",
-							"})"
+							"    pm.expect(pm.response.json().first_name).to.equal(\"test\");\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -91,7 +103,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"test\",\r\n    \"job\": \"user1\"\r\n}",
+					"raw": "{\r\n    \"email\": \"test.user@reqres.in\",\r\n    \"first_name\": \"test\",\r\n    \"last_name\": \"user\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,6 +118,77 @@
 					"path": [
 						"api",
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should return 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"morpheus\",\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/users/{{userId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Verify correct first name is returned\", function () {\r",
+							"    pm.expect(data[0].first_name).to.equal(\"George\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users/{{userId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{userId}}"
 					]
 				}
 			},
@@ -134,6 +217,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": ""
 		}
 	]
 }

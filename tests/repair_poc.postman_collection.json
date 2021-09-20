@@ -160,17 +160,19 @@
 			"response": []
 		},
 		{
-			"name": "Get Users",
+			"name": "Get User",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"var data = pm.response.json().data;\r",
+							"console.log(data);\r",
 							"pm.test(\"Verify status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"pm.test(\"Verify correct first name is returned\", function () {\r",
-							"    pm.expect(data[0].first_name).to.equal(\"George\");\r",
+							"    pm.expect(data.first_name).to.equal(\"George\");\r",
 							"});"
 						],
 						"type": "text/javascript"

@@ -24,10 +24,11 @@ steps:
       workingDir: $(Build.SourcesDirectory)
       customCommand: run newman-local
 
-  - task: UploadPostmanHtmlReport@1
-    displayName: 'Upload Postman Html Report'
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Report'
     inputs:
-      cwd: '$(System.DefaultWorkingDirectory)'
-      tabName: 'Postman Test'
+      testResultsFormat: JUnit
+      testResultsFiles: api-test*.xml
+      searchFolder: $(Build.SourcesDirectory)/reports
     condition: always()
     continueOnError: true

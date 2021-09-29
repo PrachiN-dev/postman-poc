@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "newman-local": "node index.js"
+    "newman-local": "node index.js",
+    "newman": "node -r dotenv/config index.js"
   },
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "newman": "^5.3.0",
     "newman-reporter-junitfull": "^1.1.1"

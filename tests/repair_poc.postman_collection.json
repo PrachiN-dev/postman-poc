@@ -18,7 +18,7 @@
 							"});\r",
 							"pm.test(\"Verify correct first name is returned\", function () {\r",
 							"    pm.expect(data[0].first_name).to.equal(\"George\");\r",
-							"    pm.environment.set(\"userId\", data[0].id);\r",
+							"    // pm.environment.set(\"userId\", data[0].id);\r",
 							"});\r",
 							""
 						],
@@ -160,18 +160,18 @@
 			"response": []
 		},
 		{
-			"name": "Get User",
+			"name": "Get Users",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = pm.response.json().data;\r",
-							"console.log(data);\r",
 							"pm.test(\"Verify status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"pm.test(\"Verify correct first name is returned\", function () {\r",
+							"    console.log(data)\r",
 							"    pm.expect(data.first_name).to.equal(\"George\");\r",
 							"});"
 						],
